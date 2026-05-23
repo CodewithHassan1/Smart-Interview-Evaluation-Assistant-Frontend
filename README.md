@@ -24,4 +24,4 @@ App: http://127.0.0.1:5173
 
 ## Related repo
 
-Backend: [Smart-Interview-Evaluation-Assistant-Backend](https://github.com/HassanHaider55/Smart-Interview-Evaluation-Assistant-Backend)
+Backend: [Smart-Interview-Evaluation-Assistant-Backend](https://github.com/CodewithHassan1/Smart-Interview-Evaluation-Assistant-Backend)
