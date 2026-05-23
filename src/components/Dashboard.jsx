@@ -97,15 +97,17 @@ export default function Dashboard({ authToken, user, onLogout }) {
 
   return (
     <div className="min-h-screen bg-slate-50 pb-10 dark:bg-slate-950">
-      <header className="border-b border-slate-200 bg-white py-5 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6">
-          <div>
+      <header className="border-b border-slate-200 bg-white py-6 shadow-sm dark:border-slate-700 dark:bg-slate-900">
+        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
+          <div className="text-center lg:text-left">
             <p className="text-sm uppercase tracking-[0.3em] text-brand-500">Interview Evaluation</p>
             <h1 className="mt-2 text-3xl font-semibold text-slate-900 dark:text-slate-50">Smart recruitment reports</h1>
-            <p className="mt-1 text-slate-600 dark:text-slate-400">Transform messy notes into consistent candidate reports with AI support.</p>
+            <p className="mt-2 max-w-2xl text-slate-600 dark:text-slate-400 lg:mx-0 mx-auto">
+              Transform messy notes into consistent candidate reports with AI support.
+            </p>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-4 lg:justify-end">
             <button
               onClick={toggleTheme}
               className="rounded-full bg-slate-100 p-2 text-slate-700 transition hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
@@ -136,9 +138,9 @@ export default function Dashboard({ authToken, user, onLogout }) {
         </div>
       </header>
 
-      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-        <div className="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
-          <section className="space-y-6">
+      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:py-10">
+        <div className="grid items-start gap-8 lg:gap-10 xl:grid-cols-2">
+          <section className="space-y-6 xl:min-w-0">
             <EvaluationForm onSubmit={handleSubmit} />
             <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900">
               <div className="mb-4 flex items-center justify-between">
@@ -150,15 +152,17 @@ export default function Dashboard({ authToken, user, onLogout }) {
               </div>
 
               {loading ? (
-                <p className="text-slate-600 dark:text-slate-400">Loading records...</p>
+                <p className="py-10 text-center text-slate-600 dark:text-slate-400">Loading records...</p>
               ) : evaluations.length === 0 ? (
-                <p className="text-slate-600 dark:text-slate-400">No evaluations yet. Submit a new report to begin.</p>
+                <p className="py-10 text-center text-slate-600 dark:text-slate-400">
+                  No evaluations yet. Submit a new report to begin.
+                </p>
               ) : (
                 <div className="space-y-3">
                   {evaluations.map((item) => (
                     <div
                       key={item.id}
-                      className={`flex w-full items-center gap-2 rounded-3xl border transition ${
+                      className={`flex w-full items-stretch gap-0 overflow-hidden rounded-3xl border transition ${
                         activeReport?.id === item.id
                           ? "border-brand-400 bg-brand-50 dark:border-brand-400 dark:bg-brand-900/20"
                           : "border-slate-200 bg-white hover:border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:hover:border-slate-600"
@@ -167,14 +171,14 @@ export default function Dashboard({ authToken, user, onLogout }) {
                       <button
                         type="button"
                         onClick={() => setActiveReport(item)}
-                        className="flex-1 px-4 py-4 text-left"
+                        className="flex min-w-0 flex-1 px-4 py-4 text-left"
                       >
-                        <div className="flex items-center justify-between gap-4">
-                          <div>
-                            <p className="font-semibold text-slate-900 dark:text-slate-50">{item.candidate_name}</p>
+                        <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                          <div className="min-w-0">
+                            <p className="truncate font-semibold text-slate-900 dark:text-slate-50">{item.candidate_name}</p>
                             <p className="text-sm text-slate-500 dark:text-slate-400">{item.position}</p>
                           </div>
-                          <span className="rounded-full bg-slate-100 px-3 py-1 text-xs uppercase tracking-[0.18em] text-slate-700 dark:bg-slate-700 dark:text-slate-300">
+                          <span className="inline-flex w-fit shrink-0 self-start rounded-full bg-slate-100 px-3 py-1 text-xs font-medium uppercase tracking-wide text-slate-700 sm:self-center dark:bg-slate-700 dark:text-slate-300">
                             {item.final_verdict}
                           </span>
                         </div>
@@ -185,7 +189,7 @@ export default function Dashboard({ authToken, user, onLogout }) {
                           if (!confirm(`Delete evaluation for ${item.candidate_name}?`)) return;
                           handleDelete(item.id);
                         }}
-                        className="mr-3 rounded-xl border border-red-200 px-3 py-2 text-xs font-medium text-red-600 hover:bg-red-50 dark:border-red-800 dark:text-red-400 dark:hover:bg-red-950/40"
+                        className="flex shrink-0 items-center self-center border-l border-slate-200 px-4 py-2 text-xs font-medium text-red-600 hover:bg-red-50 dark:border-slate-600 dark:text-red-400 dark:hover:bg-red-950/40"
                         title="Delete evaluation"
                       >
                         Delete
@@ -197,7 +201,7 @@ export default function Dashboard({ authToken, user, onLogout }) {
             </div>
           </section>
 
-          <section className="space-y-6">
+          <section className="flex flex-col gap-6 xl:sticky xl:top-8 xl:min-w-0">
             {activeReport ? (
               <ReportCard
                 evaluation={activeReport}
@@ -205,13 +209,15 @@ export default function Dashboard({ authToken, user, onLogout }) {
                 onDelete={handleDelete}
               />
             ) : (
-              <div className="rounded-3xl border border-slate-200 bg-white p-8 text-center text-slate-600 shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:text-slate-400">
+              <div className="flex min-h-[280px] flex-col items-center justify-center rounded-3xl border border-slate-200 bg-white p-8 text-center text-slate-600 shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:text-slate-400">
                 <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">Ready for your first report</h2>
-                <p className="mt-2">Submit a candidate evaluation and see the structured AI output instantly.</p>
+                <p className="mt-3 max-w-sm">Submit a candidate evaluation and see the structured AI output instantly.</p>
               </div>
             )}
             {statusMessage ? (
-              <p className="rounded-3xl bg-slate-100 px-4 py-3 text-sm text-slate-700 dark:bg-slate-800 dark:text-slate-300">{statusMessage}</p>
+              <p className="mx-auto w-full max-w-xl rounded-2xl border border-slate-200 bg-slate-100 px-4 py-3 text-center text-sm text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                {statusMessage}
+              </p>
             ) : null}
           </section>
         </div>

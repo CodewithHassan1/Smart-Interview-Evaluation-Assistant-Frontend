@@ -35,21 +35,24 @@ export default function ReportCard({ evaluation, onDelete, onVerdictChange }) {
   }
 
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div>
+    <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900 lg:p-8">
+      <div className="flex flex-col gap-5 border-b border-slate-100 pb-6 dark:border-slate-800 sm:flex-row sm:items-start sm:justify-between">
+        <div className="min-w-0 text-center sm:text-left">
           <p className="text-sm uppercase tracking-[0.3em] text-brand-500">Professional report</p>
           <h2 className="mt-2 text-2xl font-semibold text-slate-900 dark:text-slate-50">{evaluation.candidate_name}</h2>
-          <p className="text-sm text-slate-600 dark:text-slate-400">{evaluation.position}</p>
+          <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">{evaluation.position}</p>
         </div>
-        <div className="flex items-center gap-3">
-          <button onClick={exportPdf} className="rounded-2xl bg-brand-700 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-500 dark:hover:bg-brand-600">
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:justify-end">
+          <button
+            onClick={exportPdf}
+            className="rounded-2xl bg-brand-700 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-500 dark:hover:bg-brand-600"
+          >
             Export PDF
           </button>
           {onDelete && (
             <button
               onClick={async () => {
-                if (!confirm('Delete this evaluation? This action cannot be undone.')) return;
+                if (!confirm("Delete this evaluation? This action cannot be undone.")) return;
                 await onDelete(evaluation.id);
               }}
               className="rounded-2xl border border-red-500 bg-white px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 dark:border-red-700 dark:bg-slate-800 dark:text-red-400"
@@ -62,17 +65,17 @@ export default function ReportCard({ evaluation, onDelete, onVerdictChange }) {
 
       <div id="report-preview" className="mt-6 space-y-6 rounded-3xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-700 dark:bg-slate-800">
         <section className="space-y-3">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div className="flex-1">
-              <p className="text-sm text-slate-500 dark:text-slate-400">Final Recommendation</p>
+          <div className="grid gap-4 rounded-2xl bg-white p-4 dark:bg-slate-900/50 sm:grid-cols-[1fr_auto] sm:items-center">
+            <div>
+              <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Final Recommendation</p>
               <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
                 Override the AI verdict when every report defaults to No Hire.
               </p>
-              <div className="mt-3 flex flex-wrap items-center gap-3">
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-3 sm:justify-start">
                 <select
                   value={verdict}
                   onChange={(event) => setVerdict(event.target.value)}
-                  className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-900 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-50"
+                  className="min-w-[10rem] rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-semibold text-slate-900 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-50"
                 >
                   {VERDICT_OPTIONS.map((option) => (
                     <option key={option} value={option}>
@@ -85,15 +88,17 @@ export default function ReportCard({ evaluation, onDelete, onVerdictChange }) {
                     type="button"
                     onClick={handleVerdictSave}
                     disabled={savingVerdict}
-                    className="rounded-2xl bg-brand-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-500 disabled:opacity-60 dark:hover:bg-brand-600"
+                    className="rounded-2xl bg-brand-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-500 disabled:opacity-60 dark:hover:bg-brand-600"
                   >
                     {savingVerdict ? "Saving..." : "Save verdict"}
                   </button>
                 )}
               </div>
             </div>
-            <div className="rounded-3xl bg-white px-4 py-3 text-sm font-medium text-slate-700 shadow-sm dark:bg-slate-900 dark:text-slate-300">
-              {new Date(evaluation.created_at).toLocaleDateString()}
+            <div className="flex justify-center sm:justify-end">
+              <span className="inline-flex rounded-2xl bg-white px-4 py-3 text-sm font-medium text-slate-700 shadow-sm dark:bg-slate-800 dark:text-slate-300">
+                {new Date(evaluation.created_at).toLocaleDateString()}
+              </span>
             </div>
           </div>
           <div className="rounded-3xl bg-white p-4 text-sm leading-7 text-slate-700 shadow-sm dark:bg-slate-700 dark:text-slate-300">
