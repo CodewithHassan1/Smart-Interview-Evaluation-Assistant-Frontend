@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Dropdown from "./Dropdown";
 
 const positions = ["Backend Intern", "Frontend Developer", "Full Stack Developer", "QA Engineer", "Product Designer"];
 
@@ -33,16 +34,15 @@ export default function EvaluationForm({ onSubmit }) {
             />
           </label>
 
-          <label className="block">
+          <div className="block">
             <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Position</span>
-            <select value={position} onChange={(event) => setPosition(event.target.value)} className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-500">
-              {positions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </label>
+            <Dropdown
+              value={position}
+              onChange={setPosition}
+              options={positions}
+              className="mt-2 w-full"
+            />
+          </div>
         </div>
 
         <label className="block">

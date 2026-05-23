@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import Scorecard from "./Scorecard";
+import Dropdown from "./Dropdown";
 
 const VERDICT_OPTIONS = ["Strong Hire", "Hire", "No Hire"];
 
@@ -72,17 +73,12 @@ export default function ReportCard({ evaluation, onDelete, onVerdictChange }) {
                 Override the AI verdict when every report defaults to No Hire.
               </p>
               <div className="mt-4 flex flex-wrap items-center justify-center gap-3 sm:justify-start">
-                <select
+                <Dropdown
                   value={verdict}
-                  onChange={(event) => setVerdict(event.target.value)}
-                  className="min-w-[10rem] rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-semibold text-slate-900 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-50"
-                >
-                  {VERDICT_OPTIONS.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
+                  onChange={(val) => setVerdict(val)}
+                  options={VERDICT_OPTIONS}
+                  className="min-w-[10rem]"
+                />
                 {onVerdictChange && verdict !== evaluation.final_verdict && (
                   <button
                     type="button"
