@@ -8,7 +8,7 @@ React + Vite + Tailwind UI for signing in, generating AI evaluation reports, rev
 npm install
 ```
 
-Copy `.env.example` to `.env` and set `VITE_API_BASE` to your backend API URL (default `http://127.0.0.1:8000/api`).
+The repo includes a `.env` file with `VITE_API_BASE` set for local development (`http://127.0.0.1:8000/api`). Update it if your backend runs elsewhere.
 
 ```powershell
 npm run dev
