@@ -9,11 +9,11 @@ export default function EvaluationForm({ onSubmit }) {
   const [rawNotes, setRawNotes] = useState("");
 
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-      <div className="mb-6">
-        <p className="text-sm uppercase tracking-[0.3em] text-brand-500">Candidate evaluation</p>
-        <h2 className="mt-3 text-2xl font-semibold text-slate-900 dark:text-slate-50">Convert messy notes into a professional report</h2>
-        <p className="mt-2 text-slate-600 dark:text-slate-400">Paste interview notes and let the assistant create a consistent, recruiter-ready summary.</p>
+    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:rounded-3xl sm:p-6">
+      <div className="mb-5 sm:mb-6">
+        <p className="text-xs uppercase tracking-[0.3em] text-brand-500 sm:text-sm">Candidate evaluation</p>
+        <h2 className="mt-2 text-xl font-semibold text-slate-900 dark:text-slate-50 sm:mt-3 sm:text-2xl">Convert messy notes into a professional report</h2>
+        <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 sm:text-base">Paste interview notes and let the assistant create a consistent, recruiter-ready summary.</p>
       </div>
 
       <form
@@ -48,7 +48,7 @@ export default function EvaluationForm({ onSubmit }) {
         <label className="block">
           <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Raw interview notes</span>
           <textarea
-            className="mt-2 min-h-[220px] w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-500"
+            className="mt-2 min-h-[160px] w-full px-3 py-3 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-500 sm:min-h-[220px] sm:px-4"
             value={rawNotes}
             onChange={(event) => setRawNotes(event.target.value)}
             placeholder="Type or paste messy bullet points from the interview here..."

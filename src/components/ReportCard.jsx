@@ -36,11 +36,11 @@ export default function ReportCard({ evaluation, onDelete, onVerdictChange }) {
   }
 
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900 lg:p-8">
-      <div className="flex flex-col gap-5 border-b border-slate-100 pb-6 dark:border-slate-800 sm:flex-row sm:items-start sm:justify-between">
+    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:rounded-3xl sm:p-6 lg:p-8">
+      <div className="flex flex-col gap-4 border-b border-slate-100 pb-5 dark:border-slate-800 sm:flex-row sm:items-start sm:justify-between sm:gap-5 sm:pb-6">
         <div className="min-w-0 text-center sm:text-left">
-          <p className="text-sm uppercase tracking-[0.3em] text-brand-500">Professional report</p>
-          <h2 className="mt-2 text-2xl font-semibold text-slate-900 dark:text-slate-50">{evaluation.candidate_name}</h2>
+          <p className="text-xs uppercase tracking-[0.3em] text-brand-500 sm:text-sm">Professional report</p>
+          <h2 className="mt-2 text-xl font-semibold text-slate-900 dark:text-slate-50 sm:text-2xl">{evaluation.candidate_name}</h2>
           <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">{evaluation.position}</p>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-3 sm:justify-end">
@@ -64,7 +64,7 @@ export default function ReportCard({ evaluation, onDelete, onVerdictChange }) {
         </div>
       </div>
 
-      <div id="report-preview" className="mt-6 space-y-6 rounded-3xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-700 dark:bg-slate-800">
+      <div id="report-preview" className="mt-5 space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800 sm:mt-6 sm:space-y-6 sm:rounded-3xl sm:p-6">
         <section className="space-y-3">
           <div className="grid gap-4 rounded-2xl bg-white p-4 dark:bg-slate-900/50 sm:grid-cols-[1fr_auto] sm:items-center">
             <div>
@@ -97,7 +97,7 @@ export default function ReportCard({ evaluation, onDelete, onVerdictChange }) {
               </span>
             </div>
           </div>
-          <div className="rounded-3xl bg-white p-4 text-sm leading-7 text-slate-700 shadow-sm dark:bg-slate-700 dark:text-slate-300">
+          <div className="rounded-2xl bg-white p-3 text-sm leading-7 text-slate-700 shadow-sm dark:bg-slate-700 dark:text-slate-300 sm:rounded-3xl sm:p-4">
             {evaluation.structured_report.split("\n").map((paragraph, index) => (
               <p key={index} className="mb-3 last:mb-0">
                 {paragraph}
@@ -108,7 +108,7 @@ export default function ReportCard({ evaluation, onDelete, onVerdictChange }) {
 
         <Scorecard evaluation={evaluation} />
 
-        <section className="rounded-3xl bg-white p-5 shadow-sm dark:bg-slate-700">
+        <section className="rounded-2xl bg-white p-4 shadow-sm dark:bg-slate-700 sm:rounded-3xl sm:p-5">
           <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50">Skills summary</h3>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <div>
