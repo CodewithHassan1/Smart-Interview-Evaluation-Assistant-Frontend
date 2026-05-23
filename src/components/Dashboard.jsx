@@ -9,17 +9,34 @@ export default function Dashboard({ authToken, user, onLogout }) {
   const [evaluations, setEvaluations] = useState([]);
   const [activeReport, setActiveReport] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [statusMessage, setStatusMessage] = useState("Loading latest evaluations...");
+  const [statusMessage, setStatusMessage] = useState("");
 
   useEffect(() => {
+    let cancelled = false;
     setLoading(true);
+    setStatusMessage("");
+
     fetchEvaluations(authToken)
       .then((data) => {
-        setEvaluations(data);
-        setActiveReport(data[0] || null);
+        if (cancelled) return;
+        const records = Array.isArray(data) ? data : data?.results ?? [];
+        setEvaluations(records);
+        setActiveReport(records[0] || null);
       })
-      .catch(() => setStatusMessage("Unable to load evaluations. Please refresh."))
-      .finally(() => setLoading(false));
+      .catch(() => {
+        if (!cancelled) {
+          setStatusMessage("Unable to load evaluations. Please refresh.");
+        }
+      })
+      .finally(() => {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
   }, [authToken]);
 
   async function handleDelete(id) {
@@ -193,7 +210,9 @@ export default function Dashboard({ authToken, user, onLogout }) {
                 <p className="mt-2">Submit a candidate evaluation and see the structured AI output instantly.</p>
               </div>
             )}
-            {statusMessage && <p className="rounded-3xl bg-slate-100 px-4 py-3 text-sm text-slate-700 dark:bg-slate-800 dark:text-slate-300">{statusMessage}</p>}
+            {statusMessage ? (
+              <p className="rounded-3xl bg-slate-100 px-4 py-3 text-sm text-slate-700 dark:bg-slate-800 dark:text-slate-300">{statusMessage}</p>
+            ) : null}
           </section>
         </div>
       </main>
