@@ -28,6 +28,13 @@ App: http://127.0.0.1:5173
 - `npm run build` — production build
 - `npm run preview` — preview production build
 
+## Deploy (Vercel)
+
+1. Import this repo on [Vercel](https://vercel.com).
+2. Framework preset: **Vite** — build `npm run build`, output `dist`.
+3. Environment variable: `VITE_API_BASE=https://YOUR-RENDER-API.onrender.com/api`
+4. `vercel.json` is included for React Router (`/signin`, etc.).
+
 ## Related repo
 
 Backend: [Smart-Interview-Evaluation-Assistant-Backend](https://github.com/CodewithHassan1/Smart-Interview-Evaluation-Assistant-Backend)

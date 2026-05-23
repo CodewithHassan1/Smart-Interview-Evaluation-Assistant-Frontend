@@ -2,12 +2,18 @@ import axios from "axios";
 
 const API_BASE = import.meta.env.VITE_API_BASE || "http://127.0.0.1:8000/api";
 
+function unwrapList(data) {
+  return Array.isArray(data) ? data : data?.results ?? [];
+}
+
 export function authHeaders(token) {
   return { Authorization: `Token ${token}` };
 }
 
 export function fetchEvaluations(token) {
-  return axios.get(`${API_BASE}/evaluations/`, { headers: authHeaders(token) }).then((res) => res.data);
+  return axios
+    .get(`${API_BASE}/evaluations/`, { headers: authHeaders(token) })
+    .then((res) => unwrapList(res.data));
 }
 
 export function createEvaluation(token, payload) {
