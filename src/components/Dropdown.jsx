@@ -22,7 +22,7 @@ export default function Dropdown({ value, onChange, options, className = "" }) {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="inline-flex w-full justify-between items-center gap-x-1.5 rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+        className="inline-flex w-48 justify-between items-center gap-x-1.5 rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
       >
         <span>{value}</span>
         <svg
@@ -42,7 +42,7 @@ export default function Dropdown({ value, onChange, options, className = "" }) {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 z-50 mt-2 w-full min-w-[12rem] origin-top-right rounded-xl border border-slate-200 bg-white p-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-slate-700 dark:bg-slate-800 animate-in fade-in slide-in-from-top-2 duration-150">
+        <div className="absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-xl border border-slate-200 bg-white p-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-slate-700 dark:bg-slate-800 animate-in fade-in slide-in-from-top-2 duration-150">
           <div className="py-1" role="menu" aria-orientation="vertical">
             {options.map((option) => {
               const isSelected = option === value;
