@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import Scorecard from "./Scorecard";
+import Dropdown from "./Dropdown"; // Added this import for your dropdown component
 
 const VERDICT_OPTIONS = ["Strong Hire", "Hire", "No Hire"];
 
@@ -22,6 +23,7 @@ export default function ReportCard({ evaluation, onDelete, onVerdictChange }) {
       setSavingVerdict(false);
     }
   }
+
   async function exportPdf() {
     const element = document.getElementById("report-preview");
     if (!element) return;
@@ -66,35 +68,28 @@ export default function ReportCard({ evaluation, onDelete, onVerdictChange }) {
       <div id="report-preview" className="mt-6 space-y-6 rounded-3xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-700 dark:bg-slate-800">
         <section className="space-y-3">
           <div className="grid gap-4 rounded-2xl bg-white p-4 dark:bg-slate-900/50 sm:grid-cols-[1fr_auto] sm:items-center">
-            <div>
-              <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Final Recommendation</p>
-              <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                Override the AI verdict when every report defaults to No Hire.
-              </p>
-              <div className="mt-4 flex flex-wrap items-center justify-center gap-3 sm:justify-start">
-                <select
+            <div className="block">
+              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Verdict</span>
+              <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <Dropdown
                   value={verdict}
-                  onChange={(event) => setVerdict(event.target.value)}
-                  className="min-w-[10rem] rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-semibold text-slate-900 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-50"
-                >
-                  {VERDICT_OPTIONS.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
+                  onChange={(val) => setVerdict(val)}
+                  options={VERDICT_OPTIONS}
+                  className="w-full sm:min-w-[10rem]"
+                />
                 {onVerdictChange && verdict !== evaluation.final_verdict && (
                   <button
                     type="button"
                     onClick={handleVerdictSave}
                     disabled={savingVerdict}
-                    className="rounded-2xl bg-brand-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-500 disabled:opacity-60 dark:hover:bg-brand-600"
+                    className="w-full rounded-2xl bg-brand-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-500 disabled:opacity-60 dark:hover:bg-brand-600 sm:w-auto"
                   >
                     {savingVerdict ? "Saving..." : "Save verdict"}
                   </button>
                 )}
               </div>
             </div>
+
             <div className="flex justify-center sm:justify-end">
               <span className="inline-flex rounded-2xl bg-white px-4 py-3 text-sm font-medium text-slate-700 shadow-sm dark:bg-slate-800 dark:text-slate-300">
                 {new Date(evaluation.created_at).toLocaleDateString()}
