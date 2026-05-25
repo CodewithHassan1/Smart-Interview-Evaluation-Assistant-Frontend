@@ -139,10 +139,10 @@ export default function Dashboard({ authToken, user, onLogout }) {
       </header>
 
       <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:py-10">
-        <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-10">
-          <section className="space-y-6 min-w-0">
+        <div className="grid items-start gap-8 lg:gap-10 xl:grid-cols-2">
+          <section className="space-y-6 xl:min-w-0">
             <EvaluationForm onSubmit={handleSubmit} />
-            <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:p-6">
+            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900">
               <div className="mb-4 flex items-center justify-between">
                 <div>
                   <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">Latest evaluations</h2>
@@ -162,7 +162,7 @@ export default function Dashboard({ authToken, user, onLogout }) {
                   {evaluations.map((item) => (
                     <div
                       key={item.id}
-                      className={`flex w-full items-stretch gap-0 overflow-hidden rounded-2xl border transition sm:rounded-3xl ${
+                      className={`flex w-full items-stretch gap-0 overflow-hidden rounded-3xl border transition ${
                         activeReport?.id === item.id
                           ? "border-brand-400 bg-brand-50 dark:border-brand-400 dark:bg-brand-900/20"
                           : "border-slate-200 bg-white hover:border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:hover:border-slate-600"
@@ -171,9 +171,9 @@ export default function Dashboard({ authToken, user, onLogout }) {
                       <button
                         type="button"
                         onClick={() => setActiveReport(item)}
-                        className="flex min-w-0 flex-1 px-3 py-3 text-left sm:px-4 sm:py-4"
+                        className="flex min-w-0 flex-1 px-4 py-4 text-left"
                       >
-                        <div className="flex w-full flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+                        <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                           <div className="min-w-0">
                             <p className="truncate font-semibold text-slate-900 dark:text-slate-50">{item.candidate_name}</p>
                             <p className="text-sm text-slate-500 dark:text-slate-400">{item.position}</p>
@@ -189,7 +189,7 @@ export default function Dashboard({ authToken, user, onLogout }) {
                           if (!confirm(`Delete evaluation for ${item.candidate_name}?`)) return;
                           handleDelete(item.id);
                         }}
-                        className="flex shrink-0 items-center self-center border-l border-slate-200 px-3 py-2 text-xs font-medium text-red-600 hover:bg-red-50 sm:px-4 dark:border-slate-600 dark:text-red-400 dark:hover:bg-red-950/40"
+                        className="flex shrink-0 items-center self-center border-l border-slate-200 px-4 py-2 text-xs font-medium text-red-600 hover:bg-red-50 dark:border-slate-600 dark:text-red-400 dark:hover:bg-red-950/40"
                         title="Delete evaluation"
                       >
                         Delete
@@ -201,7 +201,7 @@ export default function Dashboard({ authToken, user, onLogout }) {
             </div>
           </section>
 
-          <section className="flex flex-col gap-6 lg:sticky lg:top-8 min-w-0">
+          <section className="flex flex-col gap-6 xl:sticky xl:top-8 xl:min-w-0">
             {activeReport ? (
               <ReportCard
                 evaluation={activeReport}
